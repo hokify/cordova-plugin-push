@@ -1,5 +1,9 @@
 # phonegap-plugin-push [![Build Status](https://travis-ci.org/phonegap/phonegap-plugin-push.svg)](https://travis-ci.org/phonegap/phonegap-plugin-push)
 
+# fork without firebase messaging on ios
+this is a fork with just APN for ios (which means without the old code for firebase messaging on ios)
+on android this fork still uses the fcm code though.
+
 > Register and receive push notifications
 
 # Warning
