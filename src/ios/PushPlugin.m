@@ -41,29 +41,6 @@
 @synthesize clearBadge;
 @synthesize handlerObj;
 
-// contains error info
-- (void)sendDataMessageFailure:(NSNotification *)notification {
-    NSLog(@"sendDataMessageFailure");
-}
-- (void)sendDataMessageSuccess:(NSNotification *)notification {
-    NSLog(@"sendDataMessageSuccess");
-}
-
-- (void)didSendDataMessageWithID:messageID {
-    NSLog(@"didSendDataMessageWithID");
-}
-
-- (void)willSendDataMessageWithID:messageID error:error {
-    NSLog(@"willSendDataMessageWithID");
-}
-
-- (void)didDeleteMessagesOnServer {
-    NSLog(@"didDeleteMessagesOnServer");
-    // Some messages sent to this device were deleted on the GCM server before reception, likely
-    // because the TTL expired. The client should notify the app server of this, so that the app
-    // server can resend those messages.
-}
-
 - (void)init:(CDVInvokedUrlCommand*)command;
 {
     NSMutableDictionary* options = [command.arguments objectAtIndex:0];
@@ -85,9 +62,6 @@
         [self.commandDelegate runInBackground:^ {
             NSLog(@"Push Plugin register called");
             self.callbackId = command.callbackId;
-
-            NSArray* topics = [iosOptions objectForKey:@"topics"];
-            [self setFcmTopics:topics];
 
             UNAuthorizationOptions authorizationOptions = UNAuthorizationOptionNone;
 
