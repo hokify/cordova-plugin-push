@@ -23,14 +23,11 @@
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//  See GGLInstanceID.h
+//  See GGLInstanceID.h
 #define GMP_NO_MODULES true
 
 #import "PushPlugin.h"
 #import "AppDelegate+notification.h"
-@import FirebaseInstanceID;
-@import FirebaseMessaging;
-@import FirebaseAnalytics;
 
 @implementation PushPlugin : CDVPlugin
 
@@ -43,48 +40,6 @@
 @synthesize callback;
 @synthesize clearBadge;
 @synthesize handlerObj;
-
-@synthesize usesFCM;
-@synthesize fcmSandbox;
-@synthesize fcmSenderId;
-@synthesize fcmRegistrationOptions;
-@synthesize fcmRegistrationToken;
-@synthesize fcmTopics;
-
--(void)initRegistration;
-{
-    NSString * registrationToken = [[FIRInstanceID instanceID] token];
-
-    if (registrationToken != nil) {
-        NSLog(@"FCM Registration Token: %@", registrationToken);
-        [self setFcmRegistrationToken: registrationToken];
-
-        id topics = [self fcmTopics];
-        if (topics != nil) {
-            for (NSString *topic in topics) {
-                NSLog(@"subscribe to topic: %@", topic);
-                id pubSub = [FIRMessaging messaging];
-                [pubSub subscribeToTopic:topic];
-            }
-        }
-
-        [self registerWithToken:registrationToken];
-    } else {
-        NSLog(@"FCM token is null");
-    }
-
-}
-
-//  FCM refresh token
-//  Unclear how this is testable under normal circumstances
-- (void)onTokenRefresh {
-#if !TARGET_IPHONE_SIMULATOR
-    // A rotation of the registration tokens is happening, so the app needs to request a new token.
-    NSLog(@"The FCM registration token needs to be changed.");
-    [[FIRInstanceID instanceID] token];
-    [self initRegistration];
-#endif
-}
 
 // contains error info
 - (void)sendDataMessageFailure:(NSNotification *)notification {
@@ -109,54 +64,6 @@
     // server can resend those messages.
 }
 
-- (void)unregister:(CDVInvokedUrlCommand*)command;
-{
-    NSArray* topics = [command argumentAtIndex:0];
-
-    if (topics != nil) {
-        id pubSub = [FIRMessaging messaging];
-        for (NSString *topic in topics) {
-            NSLog(@"unsubscribe from topic: %@", topic);
-            [pubSub unsubscribeFromTopic:topic];
-        }
-    } else {
-        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
-        [self successWithMessage:command.callbackId withMsg:@"unregistered"];
-    }
-}
-
-- (void)subscribe:(CDVInvokedUrlCommand*)command;
-{
-    NSString* topic = [command argumentAtIndex:0];
-
-    if (topic != nil) {
-        NSLog(@"subscribe from topic: %@", topic);
-        id pubSub = [FIRMessaging messaging];
-        [pubSub subscribeToTopic:topic];
-        NSLog(@"Successfully subscribe to topic %@", topic);
-        [self successWithMessage:command.callbackId withMsg:[NSString stringWithFormat:@"Successfully subscribe to topic %@", topic]];
-    } else {
-        NSLog(@"There is no topic to subscribe");
-        [self successWithMessage:command.callbackId withMsg:@"There is no topic to subscribe"];
-    }
-}
-
-- (void)unsubscribe:(CDVInvokedUrlCommand*)command;
-{
-    NSString* topic = [command argumentAtIndex:0];
-
-    if (topic != nil) {
-        NSLog(@"unsubscribe from topic: %@", topic);
-        id pubSub = [FIRMessaging messaging];
-        [pubSub unsubscribeFromTopic:topic];
-        NSLog(@"Successfully unsubscribe from topic %@", topic);
-        [self successWithMessage:command.callbackId withMsg:[NSString stringWithFormat:@"Successfully unsubscribe from topic %@", topic]];
-    } else {
-        NSLog(@"There is no topic to unsubscribe");
-        [self successWithMessage:command.callbackId withMsg:@"There is no topic to unsubscribe"];
-    }
-}
-
 - (void)init:(CDVInvokedUrlCommand*)command;
 {
     NSMutableDictionary* options = [command.arguments objectAtIndex:0];
@@ -174,21 +81,6 @@
         }];
     } else {
         NSLog(@"Push Plugin VoIP missing or false");
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self selector:@selector(onTokenRefresh)
-         name:kFIRInstanceIDTokenRefreshNotification object:nil];
-
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self selector:@selector(sendDataMessageFailure:)
-         name:FIRMessagingSendErrorNotification object:nil];
-
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self selector:@selector(sendDataMessageSuccess:)
-         name:FIRMessagingSendSuccessNotification object:nil];
-
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self selector:@selector(didDeleteMessagesOnServer)
-         name:FIRMessagingMessagesDeletedNotification object:nil];
 
         [self.commandDelegate runInBackground:^ {
             NSLog(@"Push Plugin register called");
@@ -297,35 +189,8 @@
 
             // Load the file content and read the data into arrays
             NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
-            fcmSenderId = [dict objectForKey:@"GCM_SENDER_ID"];
-            BOOL isGcmEnabled = [[dict valueForKey:@"IS_GCM_ENABLED"] boolValue];
 
-            NSLog(@"FCM Sender ID %@", fcmSenderId);
-
-            //  GCM options
-            [self setFcmSenderId: fcmSenderId];
-            if(isGcmEnabled && [[self fcmSenderId] length] > 0) {
-                NSLog(@"Using FCM Notification");
-                [self setUsesFCM: YES];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if([FIRApp defaultApp] == nil)
-                        [FIRApp configure];
-                    [self initRegistration];
-                });
-            } else {
-                NSLog(@"Using APNS Notification");
-                [self setUsesFCM:NO];
-            }
-            id fcmSandboxArg = [iosOptions objectForKey:@"fcmSandbox"];
-
-            [self setFcmSandbox:@NO];
-            if ([self usesFCM] &&
-                (([fcmSandboxArg isKindOfClass:[NSString class]] && [fcmSandboxArg isEqualToString:@"true"]) ||
-                 [fcmSandboxArg boolValue]))
-            {
-                NSLog(@"Using FCM Sandbox");
-                [self setFcmSandbox:@YES];
-            }
+            NSLog(@"Using APNS Notification");
 
             if (notificationMessage) {            // if there is a pending startup notification
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -380,9 +245,6 @@
     __weak PushPlugin *weakSelf = self;
     [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
 
-        if(![weakSelf usesFCM]) {
-            [weakSelf registerWithToken: token];
-        }
     }];
 
 
@@ -503,7 +365,7 @@
             [matchingNotificationIdentifiers addObject:notification.request.identifier];
         }
         [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:matchingNotificationIdentifiers];
-        
+
         NSString *message = [NSString stringWithFormat:@"Cleared notification with ID: %@", notId];
         CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
         [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
@@ -565,11 +427,7 @@
     // Send result to trigger 'registration' event but keep callback
     NSMutableDictionary* message = [NSMutableDictionary dictionaryWithCapacity:2];
     [message setObject:token forKey:@"registrationId"];
-    if ([self usesFCM]) {
-        [message setObject:@"FCM" forKey:@"registrationType"];
-    } else {
-        [message setObject:@"APNS" forKey:@"registrationType"];
-    }
+    [message setObject:@"APNS" forKey:@"registrationType"];
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:message];
     [pluginResult setKeepCallbackAsBool:YES];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];

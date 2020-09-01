@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" 
-  xmlns:android="http://schemas.android.com/apk/res/android" 
-  xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads" 
-  xmlns:rim="http://www.blackberry.com/ns/widgets" 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
+  xmlns:rim="http://www.blackberry.com/ns/widgets"
   id="phonegap-plugin-push" version="2.3.0">
   <name>PushPlugin</name>
   <description>    This plugin allows your application to receive push notifications on Android, iOS and Windows devices.    Android uses Firebase Cloud Messaging.    iOS uses Apple APNS Notifications.    Windows uses Microsoft WNS Notifications.  </description>
@@ -31,22 +31,12 @@
       <activity android:name="com.adobe.phonegap.push.PushHandlerActivity" android:exported="true" android:permission="${applicationId}.permission.PushHandlerActivity"/>
       <receiver android:name="com.adobe.phonegap.push.BackgroundActionButtonHandler"/>
       <receiver android:name="com.adobe.phonegap.push.PushDismissedHandler"/>
-      <service android:name="com.adobe.phonegap.push.FCMService">
-        <intent-filter>
-          <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-        </intent-filter>
-      </service>
-      <service android:name="com.adobe.phonegap.push.PushInstanceIDListenerService">
-        <intent-filter>
-          <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-        </intent-filter>
       </service>
     </config-file>
     <preference name="ANDROID_SUPPORT_V13_VERSION" default="27.+"/>
     <preference name="FCM_VERSION" default="17.0.+"/>
     <framework src="com.android.support:support-v13:$ANDROID_SUPPORT_V13_VERSION"/>
     <framework src="me.leolin:ShortcutBadger:1.1.17@aar"/>
-    <framework src="com.google.firebase:firebase-messaging:$FCM_VERSION"/>
     <dependency id="cordova-support-google-services" version="~1.3.1"/>
     <dependency id="phonegap-plugin-multidex" version="~1.0.0"/>
     <source-file src="src/android/com/adobe/phonegap/push/FCMService.java" target-dir="src/com/adobe/phonegap/push/"/>

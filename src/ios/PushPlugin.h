@@ -56,9 +56,6 @@
 @property (nonatomic, strong) NSMutableDictionary *handlerObj;
 
 - (void)init:(CDVInvokedUrlCommand*)command;
-- (void)unregister:(CDVInvokedUrlCommand*)command;
-- (void)subscribe:(CDVInvokedUrlCommand*)command;
-- (void)unsubscribe:(CDVInvokedUrlCommand*)command;
 - (void)clearNotification:(CDVInvokedUrlCommand*)command;
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
