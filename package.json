@@ -1,18 +1,18 @@
 {
-  "name": "@hokify/phonegap-plugin-push",
+  "name": "@hokify/cordova-plugin-push",
   "description": "Register and receive push notifications.",
   "types": "./types/index.d.ts",
-  "version": "3.0.0",
-  "homepage": "http://github.com/hokify/phonegap-plugin-push#readme",
+  "version": "1.0.0",
+  "homepage": "http://github.com/hokify/cordova-plugin-push#readme",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hokify/phonegap-plugin-push.git"
+    "url": "git://github.com/hokify/cordova-plugin-push.git"
   },
   "bugs": {
-    "url": "https://github.com/hokify/phonegap-plugin-push/issues"
+    "url": "https://github.com/hokify/cordova-plugin-push/issues"
   },
   "cordova": {
-    "id": "@hokify/phonegap-plugin-push",
+    "id": "@hokify/cordova-plugin-push",
     "platforms": [
       "ios",
       "android",

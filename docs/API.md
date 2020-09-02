@@ -72,7 +72,7 @@ All iOS boolean options can also be specified as `string`
 | `ios.badge`      | `boolean` | `false` | Optional. If `true` the device sets the badge number on receipt of notification. **Note:** the value you set this option to the first time you call the init method will be how the application always acts. Once this is set programmatically in the init method it can only be changed manually by the user in Settings>Notifications>`App Name`. This is normal iOS behaviour. |
 | `ios.sound`      | `boolean` | `false` | Optional. If `true` the device plays a sound on receipt of notification. **Note:** the value you set this option to the first time you call the init method will be how the application always acts. Once this is set programmatically in the init method it can only be changed manually by the user in Settings>Notifications>`App Name`. This is normal iOS behaviour.         |
 | `ios.clearBadge` | `boolean` | `false` | Optional. If `true` the badge will be cleared on app startup.                                                                                                                                                                                                                                                                                                                     |
-| `ios.categories` | `Object`  | `{}`    | Optional. The data required in order to enable Action Buttons for iOS. See [Action Buttons on iOS](https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/PAYLOAD.md#action-buttons-1) for more details.                                                                                                                                                              |
+| `ios.categories` | `Object`  | `{}`    | Optional. The data required in order to enable Action Buttons for iOS. See [Action Buttons on iOS](https://github.com/hokify/cordova-plugin-push/blob/master/docs/PAYLOAD.md#action-buttons-1) for more details.                                                                                                                                                              |
 
 #### iOS GCM support
 
@@ -210,7 +210,7 @@ PushNotification.createChannel(
 );
 ```
 
-The above will create a channel for your app. You'll need to provide the `id`, `description` and `importance` properties. 
+The above will create a channel for your app. You'll need to provide the `id`, `description` and `importance` properties.
 
 A default channel with the id "PushPluginChannel" is created automatically. To make changes to the default channel's settings, create a channel with the id "PushPluginChannel" before calling the PushNotification.init function.
 
@@ -220,7 +220,7 @@ A default channel with the id "PushPluginChannel" is created automatically. To m
 | -------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                             | `String`  | The id of the channel. Must be unique per package. The value may be truncated if it is too long.                                                                                                                                    |
 | `description`                    | `String`  | The user visible name of the channel. The recommended maximum length is 40 characters; the value may be truncated if it is too long.                                                                                                |
-| `importance`                     | `Int`     | The importance of the channel. This controls how interruptive notifications posted to this channel are. The importance property goes from 1 = Lowest, 2 = Low, 3 = Normal, 4 = High and 5 = Highest.                                |            
+| `importance`                     | `Int`     | The importance of the channel. This controls how interruptive notifications posted to this channel are. The importance property goes from 1 = Lowest, 2 = Low, 3 = Normal, 4 = High and 5 = Highest.                                |
 | `sound`                          | `String`  | The name of the sound file to be played upon receipt of the notification in this channel. Empty string to disable sound. Cannot be changed after channel is created.                                                                                               |
 | `vibration`                      | `Boolean` or `Array` | Boolean sets whether notification posted to this channel should vibrate. Array sets custom vibration pattern. Example - vibration: `[2000, 1000, 500, 500]`. Cannot be changed after channel is created.                 |
 | `visibility`                     | `Int`     | Sets whether notifications posted to this channel appear on the lockscreen or not, and if so, whether they appear in a redacted form. 0 = Private, 1 = Public, -1 = Secret.                                                         |
@@ -356,7 +356,7 @@ push.on('notification', data => {
 });
 ```
 
-Android quirk: Please note that some payloads may cause this event not to be always fired: [data vs notification payloads](https://github.com/phonegap/phonegap-plugin-push/blob/master/docs/PAYLOAD.md#notification-vs-data-payloads)
+Android quirk: Please note that some payloads may cause this event not to be always fired: [data vs notification payloads](https://github.com/hokify/cordova-plugin-push/blob/master/docs/PAYLOAD.md#notification-vs-data-payloads)
 
 ## push.on('error', callback)
 

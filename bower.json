@@ -1,5 +1,5 @@
 {
-  "name": "@hokify/phonegap-plugin-push",
+  "name": "@hokify/cordova-plugin-push",
   "description": "bower package for server side javascript",
   "main": "www/push.js",
   "authors": [
@@ -14,7 +14,7 @@
     "cordova-windows",
     "cordova-browser"
   ],
-  "homepage": "https://github.com/hokify/phonegap-plugin-push",
+  "homepage": "https://github.com/hokify/cordova-plugin-push",
   "moduleType": [],
   "ignore": [
     "**/.*",

@@ -2128,12 +2128,12 @@ On iOS, using the FCM app server protocol, if you are trying to send a silent pu
 		"custom_var_2:" "custom value here" /* Retrieved on app as data.additionalData.custom_var_2 */
 	},
   /* Forces FCM silent push notifications to be triggered in the foreground of your iOS device. */
-  "content_available": true  
+  "content_available": true
 }
 ```
-*Doc modification came in response to @andreszs - Issue [#2449](https://github.com/phonegap/phonegap-plugin-push/issues/2449).
+*Doc modification came in response to @andreszs - Issue [#2449](https://github.com/hokify/cordova-plugin-push/issues/2449).
 
-** IMPORTANT: When using the content_available field, Android payload issues may occur. [Read here](../docs/PAYLOAD.md#user-content-use-of-content_available-true) Make sure you separate your Android/iOS server payloads to mitigate any problems that may arise. 
+** IMPORTANT: When using the content_available field, Android payload issues may occur. [Read here](../docs/PAYLOAD.md#user-content-use-of-content_available-true) Make sure you separate your Android/iOS server payloads to mitigate any problems that may arise.
 
 More information on how to send push notifications using the FCM HTTP protocol and payload details can be found here:
 

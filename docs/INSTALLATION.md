@@ -35,25 +35,25 @@
 To install from the command line:
 
 ```bash
-phonegap plugin add phonegap-plugin-push
+phonegap plugin add @hokify/cordova-plugin-push
 ```
 
 or
 
 ```bash
-cordova plugin add phonegap-plugin-push
+cordova plugin add @hokify/cordova-plugin-push
 ```
 
 It is also possible to install via repo url directly ( unstable )
 
 ```bash
-phonegap plugin add https://github.com/phonegap/phonegap-plugin-push
+phonegap plugin add https://github.com/hokify/cordova-plugin-push
 ```
 
 or
 
 ```bash
-cordova plugin add https://github.com/phonegap/phonegap-plugin-push
+cordova plugin add https://github.com/hokify/cordova-plugin-push
 ```
 
 As of version 2.0.0 the SENDER_ID parameter has been removed at install time. Instead you put your google-services.json (Android) and/or GoogleService-Info.plist in the root folder of your project and then add the following lines into your config.xml.
