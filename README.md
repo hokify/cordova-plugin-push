@@ -1,6 +1,6 @@
-# phonegap-plugin-push [![Build Status](https://travis-ci.org/hokify/cordova-plugin-push.svg)](https://travis-ci.org/hokify/cordova-plugin-push)
+# cordova-plugin-push [![Build Status](https://travis-ci.org/hokify/cordova-plugin-push.svg)](https://travis-ci.org/hokify/cordova-plugin-push)
 
-# fork without firebase messaging on ios
+# fork of phonegap-plugin-push without firebase messaging on ios and without browser & windows support
 this is a fork with just APN for ios (which means without the old code for firebase messaging on ios)
 on android this fork still uses the fcm code though.
 

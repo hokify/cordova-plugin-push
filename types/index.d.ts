@@ -1,4 +1,4 @@
-// Type definitions for phonegap-plugin-push
+// Type definitions for cordova-plugin-push
 // Project: https://github.com/hokify/cordova-plugin-push
 // Definitions by: Frederico Galvão <https://github.com/fredgalvao>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped

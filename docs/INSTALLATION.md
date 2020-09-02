@@ -87,7 +87,7 @@ By default, on iOS, the plugin will register with APNS. If you want to use FCM o
 ```json
   "cordovaPlugins": [
     {
-      "locator": "phonegap-plugin-push"
+      "locator": "cordova-plugin-push"
     }
   ]
 ```
@@ -95,7 +95,7 @@ By default, on iOS, the plugin will register with APNS. If you want to use FCM o
 > Note: You need to specify the SENDER_ID variable in your config.xml if you plan on installing/restoring plugins using the prepare method. The prepare method will skip installing the plugin otherwise.
 
 ```xml
-<plugin name="phonegap-plugin-push" spec="2.0.0" />
+<plugin name="phoncordovaegap-plugin-push" spec="2.0.0" />
 ```
 
 ## Android details
@@ -142,7 +142,7 @@ To make the two work together, you need to migrate your GCM project from Google 
 2.  Set your `FCM_VERSION` variable to match the version used in the other plugin. In case of cordova, your `config.xml` would look something like this:
 
 ```xml
-<plugin name="phonegap-plugin-push" spec="~2.2.0">
+<plugin name="cordova-plugin-push" spec="~2.2.0">
     <variable name="FCM_VERSION" value="15.0.0" />
 </plugin>
 ```
@@ -206,7 +206,7 @@ Common plugins to suffer from this outdated dependency management are plugins re
 
 #### More than one library with package name 'com.google.android.gms'
 
-When some other packages include `cordova-google-play-services` as a dependency, such as is the case with the cordova-admob and cordova-plugin-analytics plugins, it is impossible to also add the phonegap-plugin-push, for the following error will rise during the build process:
+When some other packages include `cordova-google-play-services` as a dependency, such as is the case with the cordova-admob and cordova-plugin-analytics plugins, it is impossible to also add the cordova-plugin-push, for the following error will rise during the build process:
 
 ```
 :processDebugResources FAILED
@@ -280,7 +280,7 @@ If you are on a `cordova-cli` version less than `6.1.0`, you will either have to
 i.e.
 
 ```bash
-cordova plugin add phonegap-plugin-push@1.8.1
+cordova plugin add cordova-plugin-push
 ```
 
 If you are installing this plugin using a `local file reference` or a `git url`, you will have to specify the version of this plugin explicitly (see above) if you don't fulfill the `cordova-cli` and `cordova-ios` requirements.
@@ -290,8 +290,8 @@ If you are installing this plugin using a `local file reference` or a `git url`,
 If you are attempting to install this plugin and you run into this error:
 
 ```
-Installing "phonegap-plugin-push" for ios
-Failed to install 'phonegap-plugin-push':Error: pod: Command failed with exit code 1
+Installing "cordova-plugin-push" for ios
+Failed to install 'cordova-plugin-push':Error: pod: Command failed with exit code 1
     at ChildProcess.whenDone (/Users/smacdona/code/push151/platforms/ios/cordova/node_modules/cordova-common/src/superspawn.js:169:23)
     at emitTwo (events.js:87:13)
     at ChildProcess.emit (events.js:172:7)

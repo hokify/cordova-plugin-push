@@ -44,7 +44,7 @@
 
 # Overview
 
-The following flowchart attempts to give you a picture of what happens when a push message arrives on your device when you have an app using phonegap-plugin-push.
+The following flowchart attempts to give you a picture of what happens when a push message arrives on your device when you have an app using cordova-plugin-push.
 
 ![push-flowchart](https://cloud.githubusercontent.com/assets/353180/15752003/36b80afa-28ba-11e6-818b-c6f5f2966d8f.png)
 
