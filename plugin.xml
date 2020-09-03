@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
   xmlns:rim="http://www.blackberry.com/ns/widgets"
-  id="@hokify/cordova-plugin-push" version="3.0.0">
+  id="cordova-plugin-push" version="1.0.2">
   <name>cordova-plugin-push</name>
   <description>
     This plugin allows your application to receive push notifications on Android, iOS and Windows devices.

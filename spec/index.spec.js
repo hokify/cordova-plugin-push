@@ -14,7 +14,7 @@ let options;
  * Specification.
  */
 
-describe('@hokify/cordova-plugin-push', () => {
+describe('cordova-plugin-push', () => {
   beforeEach(() => {
     options = { android: {}, ios: {}, windows: {} };
     execWin = jasmine.createSpy();

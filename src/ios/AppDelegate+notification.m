@@ -156,7 +156,7 @@ NSString *const pushPluginApplicationDidBecomeActiveNotification = @"pushPluginA
     NSLog(@"active");
 
     NSString *firstLaunchKey = @"firstLaunchKey";
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"@hokify/cordova-plugin-push"];
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"cordova-plugin-push"];
     if (![defaults boolForKey:firstLaunchKey]) {
         NSLog(@"application first launch: remove badge icon number");
         [defaults setBool:YES forKey:firstLaunchKey];
