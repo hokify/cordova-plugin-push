@@ -2,7 +2,7 @@
   "name": "@hokify/cordova-plugin-push",
   "description": "Register and receive push notifications.",
   "types": "./types/index.d.ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "http://github.com/hokify/cordova-plugin-push#readme",
   "repository": {
     "type": "git",
